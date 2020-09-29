@@ -14,11 +14,11 @@
 
 #include "Quaternion.h"
 
-//points and vectors are expressed as row-major vectors and that they are therefore pre-multiplied (meaning the point or vector appears before the matrix in the multiplication).
-
-
-// Format: column-major, when typed out it looks like row-major.
-// The matrices are being post multiplied.
+/**
+ Format: column-major, when typed out it looks like row-major.
+ The matrices are being post multiplied.
+ Col-major vs Row-major: https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/geometry/row-major-vs-column-major-vector
+ **/
 
 namespace gfx_math {
  

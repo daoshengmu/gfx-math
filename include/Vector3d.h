@@ -90,7 +90,7 @@ public:
     }
   }
   
-  Type Length() {
+  Type Length() const {
     Type sq = x * x + y * y + z * z;
     if (sq == 0) {
       return 0;
@@ -101,7 +101,7 @@ public:
   Type x, y, z;
 };
 
-// Good resource, https://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld018.htm
+// Good references, https://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld018.htm
 
 /**
   We according to the plane formula aX + bY + cZ + d = 0 and p = p0 + dir * t
@@ -141,14 +141,14 @@ bool RayIntersectWithPlane(const Vector3D<Type>& aDir,
  */
 
 template <class Type>
-bool RayIntersectWithSphere(const Vector3D<Type>& aRay,
+bool RayIntersectWithSphere(const Vector3D<Type>& aDir,
                             const Vector3D<Type>& aP0,
                             const Vector3D<Type>& aSphereOrigin,
                             Type aRadius,
                             std::vector<Vector3D<Type>>& aInterPoint) {
   Vector3D<Type> L = aP0 - aSphereOrigin;
-  Type a = aRay.DotProduct(aRay);
-  Type b = 2 * aRay.DotProduct(L);
+  Type a = aDir.DotProduct(aDir);
+  Type b = 2 * aDir.DotProduct(L);
   Type c = L.DotProduct(L) - aRadius * aRadius;
   
   assert(aInterPoint.size() == 0);
@@ -156,11 +156,10 @@ bool RayIntersectWithSphere(const Vector3D<Type>& aRay,
   Type discr = b * b - 4 * a * c;
   if (discr < 0) {
     return false;
-  }
-  else if (discr == 0) {  // −b/2a, the only intersect point.
+  } else if (discr == 0) {  // −b/2a, the only intersect point.
     Type t0;
     t0 = - 0.5 * b / a; // ray on the sphere and dist is radius.
-    Vector3D<Type> p1 = aP0 + aRay * t0;
+    Vector3D<Type> p1 = aP0 + aDir * t0;
     aInterPoint.push_back(p1);
     return true;
   }
@@ -173,14 +172,16 @@ bool RayIntersectWithSphere(const Vector3D<Type>& aRay,
   t0 = q / a;
   t1 = c / q;
 
-  if (t0 > t1) std::swap(t0, t1);
+  if (t0 > t1) {
+    std::swap(t0, t1);
+  }
   
   if (t0 >= 0) {
-    Vector3D<Type> p1 = aP0 + aRay * t0;
+    Vector3D<Type> p1 = aP0 + aDir * t0;
     aInterPoint.push_back(p1);
   }
 
-  Vector3D<Type> p2 = aP0 + aRay * t1;
+  Vector3D<Type> p2 = aP0 + aDir * t1;
   aInterPoint.push_back(p2);
   return true;
 }
@@ -260,7 +261,7 @@ bool RayIntersectWithTriangle(const Vector3D<Type>& aDir, const Vector3D<Type>& 
 
 /**
  Try to find the intersect point on AABB from ray. p = p0 + dir * t
- According to  the direction of the ray to get t0.x = (bb0.x - orig.x) / dir.x
+ According to the direction of the ray to get t0.x = (bb0.x - orig.x) / dir.x
  and see which would be tmin and tmax, Be sure dir is normalized.
  If t0x > t1y || t0y > t1x, it means no intersection. Then, continue to check t0z, t1z
  Finally, we would try to get the first intersect point by checking tmin or tmax depend on if it is > 0.
@@ -347,15 +348,28 @@ int PointIntersectWithPlane(const Vector3D<Type>& aP0,
                             const Vector3D<Type>& aPlaneNrm,
                             Type aPlaneDist) {
   Type denom = aPlaneNrm.DotProduct(aP0);
-  Type result = denom + aPlaneDist;
+  Type distance = denom + aPlaneDist;
   
-  if (fabs(result) <= FLT_EPSILON) {
+  if (fabs(distance) <= FLT_EPSILON) {
     return 0; // on the plane
-  } else if (result > 0) {
+  } else if (distance > 0) {
     return 1;
   } else {  // result < 0
     return -1;
   }
+}
+
+template <class Type>
+Type PointDistanceWithPlane(const Vector3D<Type>& aP0,
+                           const Vector3D<Type>& aPlaneNrm,
+                           Type aPlaneDist) {
+  Type denom = aPlaneNrm.DotProduct(aP0);
+  Type len = aPlaneNrm.Length();
+  if (len == 0) {
+    return 0;
+  }
+  
+  return fabs(denom + aPlaneDist) / len;
 }
 
 /**
@@ -393,14 +407,14 @@ bool AABBoxIntersectWithAABBox(const Vector3D<Type>& aBoundAMin,
 }
 
 /**
- Because the reflect direction is mirror to the incoming direction.  We can make it I - N1 = -(r - N2)
+ Because the reflection direction is mirror to the incoming direction.  We can make it I - N1 = -(r - N2)
  N1 and N2 are the projected vectors from I and r to N, and N1 is the same with N2.
  N^ = N / |N|
  I - dot(I, N) / |N| * N^ = -r + dot(I * N) / |N| * N^  => r = 2(I * n^) * n^ - I
  https://www.fabrizioduroni.it/2017/08/25/how-to-calculate-reflection-vector.html
 */
 template <class Type>
-Vector3D<Type> RefectionVector(const Vector3D<Type>& aDir, const Vector3D<Type>& aNormal) {
+Vector3D<Type> ReflectionVector(const Vector3D<Type>& aDir, const Vector3D<Type>& aNormal) {
   // 2 * dot(N^, I) * N^ - I;
   Vector3D<Type> normal(aNormal);
   normal.Normalize();

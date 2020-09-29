@@ -49,6 +49,9 @@ int main(int argc, const char * argv[]) {
   res = PointIntersectWithPlane(interPoint, planeNrm, planeDist);
   assert(res == 0);
   
+  float dist = PointDistanceWithPlane(interPoint + Vector3Df(1, 0, 0), planeNrm, planeDist);
+  assert(dist == 1);
+  
   std::vector<Vector3Df> interPointList;
   result = RayIntersectWithSphere(ray, Vector3Df(-10, 0, 0), Vector3Df(0,0,0), 5.0f, interPointList);
   assert(result);
@@ -74,7 +77,7 @@ int main(int argc, const char * argv[]) {
   result = AABBoxIntersectWithAABBox(Vector3Df(0, 0, -2), Vector3Df(4, 4, 2), Vector3Df(2, -2, -2), Vector3Df(6, 2, 2));
   assert(result);
 
-  p = RefectionVector(Vector3Df(0.707, 0.707, 0), Vector3Df(0, 1, 0));
+  p = ReflectionVector(Vector3Df(0.707, 0.707, 0), Vector3Df(0, 1, 0));
   assert(p == Vector3Df(-0.707, 0.707, 0));
   
   std::cout << "Complete." << std::endl;
