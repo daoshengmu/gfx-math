@@ -132,8 +132,9 @@ bool RayIntersectWithPlane(const Vector3D<Type>& aDir,
 
 /**
   We use the formula of b^2 - 4ac to determine if there is any intersect point in a sphere.
-  p = p0 + dir * t.  Dist(p - origin) = r => (p - origin) ^ 2 = r ^ 2
-  at^2 + bt + c  = 0. a = 1, b = 2 * dir * (p0 - origin), c = (p0 - origin)^2 - radius ^ 2   if p on the sphere , is 0.
+  p = p0 + dir * t.  Dist(p - origin) = r => (p - origin) ^ 2 = r ^ 2.
+  Based on quadratic function, at^2 + bt + c  = 0.
+  a = 1, b = 2 * dir * (p0 - origin), c = (p0 - origin)^2 - radius ^ 2.
   x = (-b +- sqrt(b^2 - 4ac)) / 2a, discr = b ^ 2 - 4ac
   if discr == 0, it mean we only have one intersection, the p = -b / 2a.
   Two intersects, (−b +- sqrt(discr)) / 2a

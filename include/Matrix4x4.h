@@ -309,7 +309,7 @@ public:
     return output;
   }
   
-  // TODO: return a quaternion
+  // TODO: Test this function.
   Vector3D<Type> GetRotation() {
     Vector3D<Type> scale(GetScale());
     
@@ -330,12 +330,35 @@ public:
     Type trace = sm00 + sm11 + sm22;
     Type S = 0;
     
-//    Vector3D<Type> output;
-//    if (trace) {
-//      S = sqrt(trace + 1.0) * 2;
-//      output.z = 0.25 * S;
-//      output
-//    }
+    Quaternion<Type> output;
+
+   if (trace > 0) {
+      S = sqrt(trace + 1.0) * 2;
+      output.w = 0.25 * S;
+      output.x = (sm12 - sm21) / S;
+      output.y = (sm20 - sm02) / S;
+      output.z = (sm01 - sm10) / S;
+    } else if (sm00 > sm11 && sm00 > sm22) {
+      S = sqrt(1.0 + sm00 - sm11 - sm22) * 2;
+      output.w = (sm12 - sm21) / S;
+      output.x = 0.25 * S;
+      output.y = (sm01 + sm10) / S;
+      output.z = (sm20 + sm02) / S;
+    } else if (sm11 > sm22) {
+      S = sqrt(1.0 + sm11 - sm00 - sm22) * 2;
+      output.z = (sm20 - sm02) / S;
+      output.x = (sm01 + sm10) / S;
+      output.y = 0.25 * S;
+      output.z = (sm12 + sm21) / S;
+    } else {
+      S = sqrt(1.0 + sm22 - sm00 - sm11) * 2;
+      output.w = (sm01 - sm10) / S;
+      output.x = (sm20 + sm02) / S;
+      output.y = (sm12 + sm21) / S;
+      output.z = 0.25 * S;
+    }
+
+    return output;
   }
   
   Vector3D<Type> TransformPoint(const Vector3D<Type>& aPoint) const {
