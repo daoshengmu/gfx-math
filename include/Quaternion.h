@@ -173,7 +173,7 @@ public:
     return output;
   }
   
-  static Quaternion<Type> SetByAxisAngle(const Vector3D<Type> aAxis, Type aRad) {
+  static Quaternion<Type> SetByAxisAngle(const Vector3D<Type>& aAxis, Type aRad) {
     Type rad = aRad * 0.5;
     Type s = sin(rad);
     

@@ -56,7 +56,6 @@ public:
   }
   
   void Transpose() {
-    
     Type a01 = _01,
      a02 = _02,
      a03 = _03;
@@ -157,7 +156,7 @@ public:
 
     temp = _01;
     _01 = cosTheta * _01 - sinTheta * _21;
-    _21 = -sinTheta * temp + cosTheta * _21;
+    _21 = sinTheta * temp + cosTheta * _21;
 
     temp = _02;
     _02 = cosTheta * _02 + -sinTheta * _22;
