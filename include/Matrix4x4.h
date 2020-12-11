@@ -530,13 +530,15 @@ public:
     look.y = aTarget.y - aEye.y;
     look.z = aTarget.z - aEye.z;
 
-    look *= -1; // because we are looking at -Z.
+    //look *= -1; // because we are looking at -Z.
     look.Normalize();
 
-    Vector3D<Type> right = aUp.CrossProduct(look);
+//    Vector3D<Type> right = aUp.CrossProduct(look);
+    Vector3D<Type> right = look.CrossProduct(aUp);
     right.Normalize();
     
-    Vector3D<Type> newUp = look.CrossProduct(right);
+//    Vector3D<Type> newUp = look.CrossProduct(right);
+    Vector3D<Type> newUp = right.CrossProduct(look);
     newUp.Normalize();
     
 //    // Using camera matrix inverse can get the same result from the below.
@@ -610,13 +612,15 @@ public:
     look.y = aTarget.y - aEye.y;
     look.z = aTarget.z - aEye.z;
 
-    look *= -1; // because we are looking at -Z.
+   // look *= -1; // because we are looking at -Z.
     look.Normalize();
 
-    Vector3D<Type> right = aUp.CrossProduct(look);
+//    Vector3D<Type> right = aUp.CrossProduct(look);
+    Vector3D<Type> right = look.CrossProduct(aUp);
     right.Normalize();
     
-    Vector3D<Type> newUp = look.CrossProduct(right);
+//    Vector3D<Type> newUp = look.CrossProduct(right);
+    Vector3D<Type> newUp = right.CrossProduct(look);
     newUp.Normalize();
     
     // The original world matrix instead of

@@ -106,7 +106,7 @@ public:
 /**
   We according to the plane formula aX + bY + cZ + d = 0 and p = p0 + dir * t
   For looking for a point from direction r on the plane, we can suppose Dot(N, p) + d = 0.
-  and Dot(N, p0 + dir * t) + d  = 0. If t < 0, it means the p is behind p0.
+  and Dot(N, p0 + dir * t) + d = 0. If t < 0, it means the p is behind p0.
  */
 // Return: false: ray no interset
 //         true: ray intersect with plane.
@@ -136,9 +136,9 @@ bool RayIntersectWithPlane(const Vector3D<Type>& aDir,
   Based on quadratic function, at^2 + bt + c  = 0.
   a = 1, b = 2 * dir * (p0 - origin), c = (p0 - origin)^2 - radius ^ 2.
   x = (-b +- sqrt(b^2 - 4ac)) / 2a, discr = b ^ 2 - 4ac
-  if discr == 0, it mean we only have one intersection, the p = -b / 2a.
+  if discr == 0, it means we only have one intersection, the p = -b / 2a.
   Two intersects, (−b +- sqrt(discr)) / 2a
- https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection
+  https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection
  */
 
 template <class Type>
@@ -159,7 +159,7 @@ bool RayIntersectWithSphere(const Vector3D<Type>& aDir,
     return false;
   } else if (discr == 0) {  // −b/2a, the only intersect point.
     Type t0;
-    t0 = - 0.5 * b / a; // ray on the sphere and dist is radius.
+    t0 = -0.5 * b / a; // ray on the sphere and dist is radius.
     Vector3D<Type> p1 = aP0 + aDir * t0;
     aInterPoint.push_back(p1);
     return true;
@@ -219,8 +219,8 @@ bool RayIntersectWithTriangle(const Vector3D<Type>& aDir, const Vector3D<Type>& 
      return false; // they are parallel so they don't intersect !
 
   // compute d parameter using equation 2
-  float d = -N.DotProduct(v0); // TODO: Check why I need to add a negate that is different from the doc.
-  // compute t (equation 3) // TODO: Check why the document removes a negate.
+  float d = -N.DotProduct(v0);
+  // compute t (equation 3)
   Type t = -(N.DotProduct(aP0) + d) / NdotRayDirection;
   // check if the triangle is in behind the ray
   if (t < 0) {
@@ -411,7 +411,7 @@ bool AABBoxIntersectWithAABBox(const Vector3D<Type>& aBoundAMin,
  Because the reflection direction is mirror to the incoming direction.  We can make it I - N1 = -(r - N2)
  N1 and N2 are the projected vectors from I and r to N, and N1 is the same with N2.
  N^ = N / |N|
- I - dot(I, N) / |N| * N^ = -r + dot(I * N) / |N| * N^  => r = 2(I * n^) * n^ - I
+ I - dot(I, N) / |N| * N^ = -r + dot(I, N) / |N| * N^  => r = 2 * dot(I, n^) * n^ - I
  https://www.fabrizioduroni.it/2017/08/25/how-to-calculate-reflection-vector.html
 */
 template <class Type>
