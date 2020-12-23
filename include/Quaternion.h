@@ -9,6 +9,8 @@
 #ifndef GFX_MATH_QUATERNION_H
 #define GFX_MATH_QUATERNION_H
 
+#include "Vector3d.h"
+
 namespace gfx_math {
 
 template <class Type>

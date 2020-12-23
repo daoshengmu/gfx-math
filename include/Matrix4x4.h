@@ -210,7 +210,7 @@ public:
   }
   
   // We are rol-major multipication.
-  Matrix4x4<Type> operator * (const Matrix4x4& aRhs) {
+  Matrix4x4<Type> operator * (const Matrix4x4& aRhs) const {
     
     Matrix4x4<Type> ouput;
 //
@@ -241,14 +241,17 @@ public:
        a01 = _elements[1],
        a02 = _elements[2],
        a03 = _elements[3];
+
     Type a10 = _elements[4],
        a11 = _elements[5],
        a12 = _elements[6],
        a13 = _elements[7];
+
     Type a20 = _elements[8],
        a21 = _elements[9],
        a22 = _elements[10],
        a23 = _elements[11];
+
     Type a30 = _elements[12],
        a31 = _elements[13],
        a32 = _elements[14],
@@ -259,7 +262,6 @@ public:
        b1 = aRhs._elements[1],
        b2 = aRhs._elements[2],
        b3 = aRhs._elements[3];
-
     ouput._elements[0] = b0 * a00 + b1 * a10 + b2 * a20 + b3 * a30;
     ouput._elements[1] = b0 * a01 + b1 * a11 + b2 * a21 + b3 * a31;
     ouput._elements[2] = b0 * a02 + b1 * a12 + b2 * a22 + b3 * a32;
@@ -455,7 +457,7 @@ public:
   static Matrix4x4<Type> Perspective(Type fovy, Type aspect, Type near, Type far) {
     Matrix4x4<Type> output;
     
-    Type f = 1.0 / tan(fovy / 2);
+    Type f = 1.0 / tan(fovy / 2.0f);
     
     output._00 = f / aspect;
     output._01 = 0;
@@ -530,15 +532,13 @@ public:
     look.y = aTarget.y - aEye.y;
     look.z = aTarget.z - aEye.z;
 
-    //look *= -1; // because we are looking at -Z.
+    look *= -1; // because we are looking at -Z.
     look.Normalize();
 
-//    Vector3D<Type> right = aUp.CrossProduct(look);
-    Vector3D<Type> right = look.CrossProduct(aUp);
+    Vector3D<Type> right = aUp.CrossProduct(look);
     right.Normalize();
     
-//    Vector3D<Type> newUp = look.CrossProduct(right);
-    Vector3D<Type> newUp = right.CrossProduct(look);
+    Vector3D<Type> newUp = look.CrossProduct(right);
     newUp.Normalize();
     
 //    // Using camera matrix inverse can get the same result from the below.
@@ -569,7 +569,8 @@ public:
 //    mtxT.Inverse();
 //    Matrix4x4<Type> tmp1 = mtxR * mtxT;
 //    assert(mtx == tmp1);
-    
+    // +y up, right hand coordinate.
+    // (+z is pointing out the screen.)
     output._00 = right.x;
     output._01 = newUp.x;
     output._02 = look.x;
@@ -612,14 +613,14 @@ public:
     look.y = aTarget.y - aEye.y;
     look.z = aTarget.z - aEye.z;
 
-   // look *= -1; // because we are looking at -Z.
+    look *= -1; // because we are looking at -Z.
     look.Normalize();
 
-//    Vector3D<Type> right = aUp.CrossProduct(look);
+  //  Vector3D<Type> right = aUp.CrossProduct(look);
     Vector3D<Type> right = look.CrossProduct(aUp);
     right.Normalize();
     
-//    Vector3D<Type> newUp = look.CrossProduct(right);
+   // Vector3D<Type> newUp = look.CrossProduct(right);
     Vector3D<Type> newUp = right.CrossProduct(look);
     newUp.Normalize();
     
@@ -747,10 +748,12 @@ public:
       Type _20, _21, _22, _23;
       Type _30, _31, _32, _33;
     };
-   
+
     Type _elements[16];
   };
 };
+
+typedef Matrix4x4<float> Matrix4x4f;
 
 }  // End of namespace gfx_math
 
