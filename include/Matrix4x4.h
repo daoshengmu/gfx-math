@@ -75,7 +75,6 @@ public:
     _30 = a03;
     _31 = a13;
     _32 = a23;
-  
   }
   
   void Translate(Type aX, Type aY, Type aZ) {
@@ -140,7 +139,6 @@ public:
     temp = _13;
     _13 = cosTheta * _13 + sinTheta * _23;
     _23 = -sinTheta * temp + cosTheta * _23;
-    
   }
   
   // https://mathworld.wolfram.com/RotationMatrix.html
@@ -209,7 +207,7 @@ public:
     return *this;
   }
   
-  // We are rol-major multipication.
+  // We are row-major multipication.
   Matrix4x4<Type> operator * (const Matrix4x4& aRhs) const {
     
     Matrix4x4<Type> ouput;
@@ -594,7 +592,7 @@ public:
   
   // Difference between TargetTo vs LookAt is TargetTo doesn't
   // transform its position with its rotation matrix.
-  // TODO: confirm it is right because gl-matrix uses a revert mtx.
+  // TODO: confirm if it is correct because gl-matrix uses a revert mtx.
   static Matrix4x4<Type> TargetTo(const Vector3D<Type>& aEye,
                                   const Vector3D<Type>& aTarget,
                                   const Vector3D<Type>& aUp) {

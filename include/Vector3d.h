@@ -212,11 +212,11 @@ bool RayIntersectWithTriangle(const Vector3D<Type>& aDir, const Vector3D<Type>& 
 
   // Step 1: finding P
 
-  // check if ray and plane are parallel ?
+  // check if ray and plane are parallel?
   Type NdotRayDirection = N.DotProduct(aDir);
   // TODO: if (det < kEpsilon) return false; // backface culling.
   if (fabs(NdotRayDirection) < FLT_EPSILON) // almost 0
-     return false; // they are parallel so they don't intersect !
+     return false; // they are parallel so they don't intersect!
 
   // compute d parameter using equation 2
   float d = -N.DotProduct(v0);
@@ -263,7 +263,7 @@ bool RayIntersectWithTriangle(const Vector3D<Type>& aDir, const Vector3D<Type>& 
 /**
  Try to find the intersect point on AABB from ray. p = p0 + dir * t
  According to the direction of the ray to get t0.x = (bb0.x - orig.x) / dir.x
- and see which would be tmin and tmax, Be sure dir is normalized.
+ and see which would be tmin and tmax, Be sure the dir is normalized.
  If t0x > t1y || t0y > t1x, it means no intersection. Then, continue to check t0z, t1z
  Finally, we would try to get the first intersect point by checking tmin or tmax depend on if it is > 0.
  */
@@ -303,7 +303,6 @@ bool RayIntersectWithAABBox(const Vector3D<Type>& aDir, const Vector3D<Type>& aP
   if (tymin > tmin) {
     tmin = tymin;
   }
-  
   if (tymax < tmax) {
     tmax = tymax;
   }
@@ -408,10 +407,12 @@ bool AABBoxIntersectWithAABBox(const Vector3D<Type>& aBoundAMin,
 }
 
 /**
- Because the reflection direction is mirror to the incoming direction.  We can make it I - N1 = -(r - N2)
- N1 and N2 are the projected vectors from I and r to N, and N1 is the same with N2.
- N^ = N / |N|
- I - dot(I, N) / |N| * N^ = -r + dot(I, N) / |N| * N^  => r = 2 * dot(I, n^) * n^ - I
+ Because the reflection direction is mirror to the incoming direction.  We can make it L - N1 = -(N - N2).
+ Besides, N1 and N2 are the projected vectors from L and R to N, and N1 is the same with N2.
+ Θr = Θl, so dot(R^, N^) == dot(L^, N^)  and R^ - N1^  = -(L^ - N2^),
+ N1^ = (dot(R^, N^) / (|R^| |N^|) ) * N^
+ N2^ = (dot(L^, N^) / (|L^| |N^|) ) * N^,  Because L^, R^, and N^ are unit vectors, their length are one.
+ Hence,  R^ - dot(L^, N^) * N^ = -L^ + dot(L^, N^) * N^,  R^ = 2 * dot(L^, N^) * N^ - L.
  https://www.fabrizioduroni.it/2017/08/25/how-to-calculate-reflection-vector.html
 */
 template <class Type>
