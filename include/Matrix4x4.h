@@ -522,7 +522,7 @@ public:
       fabs(aTarget.y - aEye.y) < FLT_EPSILON &&
       fabs(aTarget.z - aEye.z) < FLT_EPSILON
     ) {
-      return output; // return an identiy mtx if it is invalidate.
+      return output; // return an identity mtx if it is invalidate.
     }
 
     Vector3D<Type> look;
@@ -530,7 +530,7 @@ public:
     look.y = aTarget.y - aEye.y;
     look.z = aTarget.z - aEye.z;
 
-    look *= -1; // because we are looking at -Z.
+    look *= -1; // because we are doing mirror.
     look.Normalize();
 
     Vector3D<Type> right = aUp.CrossProduct(look);
@@ -592,7 +592,6 @@ public:
   
   // Difference between TargetTo vs LookAt is TargetTo doesn't
   // transform its position with its rotation matrix.
-  // TODO: confirm if it is correct because gl-matrix uses a revert mtx.
   static Matrix4x4<Type> TargetTo(const Vector3D<Type>& aEye,
                                   const Vector3D<Type>& aTarget,
                                   const Vector3D<Type>& aUp) {
@@ -603,7 +602,7 @@ public:
       fabs(aTarget.y - aEye.y) < FLT_EPSILON &&
       fabs(aTarget.z - aEye.z) < FLT_EPSILON
     ) {
-      return output; // return an identiy mtx if it is invalidate.
+      return output; // return an identity mtx if it is invalidate.
     }
 
     Vector3D<Type> look;
@@ -611,17 +610,17 @@ public:
     look.y = aTarget.y - aEye.y;
     look.z = aTarget.z - aEye.z;
 
-    look *= -1; // because we are looking at -Z.
+    look *= -1; // because we are doing mirror.
     look.Normalize();
 
-  //  Vector3D<Type> right = aUp.CrossProduct(look);
-    Vector3D<Type> right = look.CrossProduct(aUp);
+    Vector3D<Type> right = aUp.CrossProduct(look);
+  //  Vector3D<Type> right = look.CrossProduct(aUp);
     right.Normalize();
     
-   // Vector3D<Type> newUp = look.CrossProduct(right);
-    Vector3D<Type> newUp = right.CrossProduct(look);
+    Vector3D<Type> newUp = look.CrossProduct(right);
+    //Vector3D<Type> newUp = right.CrossProduct(look);
     newUp.Normalize();
-    
+
     // The original world matrix instead of
     output._00 = right.x;
     output._01 = right.y;
@@ -631,9 +630,9 @@ public:
     output._11 = newUp.y;
     output._12 = newUp.z;
     output._13 = 0;
-    output._20 = newUp.x;
-    output._21 = newUp.y;
-    output._22 = newUp.z;
+    output._20 = look.x;
+    output._21 = look.y;
+    output._22 = look.z;
     output._23 = 0;
     output._30 = aEye.x;
     output._31 = aEye.y;
