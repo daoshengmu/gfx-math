@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B7C04D5925AA58F100E2253F /* gfx_math_test.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C04D5825AA58F100E2253F /* gfx_math_test.m */; };
+		B7C04D6125AA591A00E2253F /* testVector3D.mm in Sources */ = {isa = PBXBuildFile; fileRef = B7C04D6025AA591A00E2253F /* testVector3D.mm */; };
+		B7C04D6725AA5A8E00E2253F /* testMatrix4x4.mm in Sources */ = {isa = PBXBuildFile; fileRef = B7C04D6625AA5A8E00E2253F /* testMatrix4x4.mm */; };
 		B7C25414251FB7B2009249CB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7C25413251FB7B2009249CB /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -27,11 +30,23 @@
 		B7951F8A251FD1260043E9D4 /* Vector3d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3d.h; sourceTree = "<group>"; };
 		B7951F8B251FD1430043E9D4 /* Matrix4x4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Matrix4x4.h; sourceTree = "<group>"; };
 		B7951F8C25204DB20043E9D4 /* Quaternion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
+		B7C04D5625AA58F100E2253F /* gfx-math-test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gfx-math-test.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7C04D5825AA58F100E2253F /* gfx_math_test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gfx_math_test.m; sourceTree = "<group>"; };
+		B7C04D5A25AA58F100E2253F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B7C04D6025AA591A00E2253F /* testVector3D.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = testVector3D.mm; sourceTree = "<group>"; };
+		B7C04D6625AA5A8E00E2253F /* testMatrix4x4.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = testMatrix4x4.mm; sourceTree = "<group>"; };
 		B7C25413251FB7B2009249CB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B76C93B2251FB31600EB9119 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7C04D5325AA58F100E2253F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -47,6 +62,7 @@
 				B7C25413251FB7B2009249CB /* main.cpp */,
 				B7C25411251FB3FC009249CB /* source */,
 				B7C25410251FB3F4009249CB /* include */,
+				B7C04D5725AA58F100E2253F /* gfx-math-test */,
 				B76C93B6251FB31600EB9119 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,8 +71,20 @@
 			isa = PBXGroup;
 			children = (
 				B76C93B5251FB31600EB9119 /* gfx-math */,
+				B7C04D5625AA58F100E2253F /* gfx-math-test.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B7C04D5725AA58F100E2253F /* gfx-math-test */ = {
+			isa = PBXGroup;
+			children = (
+				B7C04D6625AA5A8E00E2253F /* testMatrix4x4.mm */,
+				B7C04D6025AA591A00E2253F /* testVector3D.mm */,
+				B7C04D5825AA58F100E2253F /* gfx_math_test.m */,
+				B7C04D5A25AA58F100E2253F /* Info.plist */,
+			);
+			path = "gfx-math-test";
 			sourceTree = "<group>";
 		};
 		B7C25410251FB3F4009249CB /* include */ = {
@@ -96,6 +124,23 @@
 			productReference = B76C93B5251FB31600EB9119 /* gfx-math */;
 			productType = "com.apple.product-type.tool";
 		};
+		B7C04D5525AA58F100E2253F /* gfx-math-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B7C04D5D25AA58F100E2253F /* Build configuration list for PBXNativeTarget "gfx-math-test" */;
+			buildPhases = (
+				B7C04D5225AA58F100E2253F /* Sources */,
+				B7C04D5325AA58F100E2253F /* Frameworks */,
+				B7C04D5425AA58F100E2253F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "gfx-math-test";
+			productName = "gfx-math-test";
+			productReference = B7C04D5625AA58F100E2253F /* gfx-math-test.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -107,6 +152,9 @@
 				TargetAttributes = {
 					B76C93B4251FB31600EB9119 = {
 						CreatedOnToolsVersion = 11.3;
+					};
+					B7C04D5525AA58F100E2253F = {
+						CreatedOnToolsVersion = 12.3;
 					};
 				};
 			};
@@ -124,9 +172,20 @@
 			projectRoot = "";
 			targets = (
 				B76C93B4251FB31600EB9119 /* gfx-math */,
+				B7C04D5525AA58F100E2253F /* gfx-math-test */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B7C04D5425AA58F100E2253F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B76C93B1251FB31600EB9119 /* Sources */ = {
@@ -134,6 +193,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7C25414251FB7B2009249CB /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7C04D5225AA58F100E2253F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7C04D5925AA58F100E2253F /* gfx_math_test.m in Sources */,
+				B7C04D6125AA591A00E2253F /* testVector3D.mm in Sources */,
+				B7C04D6725AA5A8E00E2253F /* testMatrix4x4.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +334,40 @@
 			};
 			name = Release;
 		};
+		B7C04D5B25AA58F100E2253F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "gfx-math-test/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "daoshengmu.gfx-math-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B7C04D5C25AA58F100E2253F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "gfx-math-test/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "daoshengmu.gfx-math-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -282,6 +385,15 @@
 			buildConfigurations = (
 				B76C93BD251FB31600EB9119 /* Debug */,
 				B76C93BE251FB31600EB9119 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B7C04D5D25AA58F100E2253F /* Build configuration list for PBXNativeTarget "gfx-math-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7C04D5B25AA58F100E2253F /* Debug */,
+				B7C04D5C25AA58F100E2253F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

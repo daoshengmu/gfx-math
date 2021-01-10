@@ -32,11 +32,12 @@ int main(int argc, const char * argv[]) {
   
   Matrix4x4<float> matD = Matrix4x4<float>::TargetTo(Vector3D<float>(0, 0.5, 0.5),                                                                                           Vector3D<float>(0,0.2,-1),
                                                      Vector3D<float>(0,1,0));
-  assert(matC != matD);
+  assert(matC != matD); // TODO: We haven't known how to test it.
   
   Matrix4x4<float> matE = Matrix4x4<float>::FPSView(Vector3D<float>(0, 0.5, 0.5), 0.1, 0.2);
   
   Matrix4x4<float> matF = Matrix4x4<float>::Arcball(Vector3D<float>(0, 0.5, 0.5), Quaternion<float>(1,1,0,1), Vector3D<float>(1.0, 0.5, 0.5));
+  assert(matE != matF); // TODO: We haven't known how to test it.
   
   Vector3Df ray(1, 0, 0);
   Vector3Df p0(-2, 0, 0);
