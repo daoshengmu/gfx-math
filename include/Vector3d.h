@@ -40,8 +40,12 @@ public:
                     x * aInput.y - aInput.x * y);
   }
   
-  bool operator == (const Vector3D<Type>& aIn) {
+  bool operator == (const Vector3D<Type> & aIn) const {
     return (x == aIn.x && y == aIn.y && z == aIn.z);
+  }
+  
+  bool operator != (const Vector3D<Type> & aRhs) const {
+    return !(*this == aRhs);
   }
   
   Vector3D<Type>& operator /= (const Type& aScale) {

@@ -189,7 +189,7 @@ public:
     _13 = -sinTheta * temp + cosTheta * _13;
   }
   
-  bool operator == (const Matrix4x4& aRhs) {
+  bool operator == (const Matrix4x4<Type>& aRhs) const {
     for (int i = 0; i < 16; i++) {
       if (_elements[i] != aRhs._elements[i]) {
         return false;
@@ -198,17 +198,17 @@ public:
     return true;
   }
   
-  bool operator != (const Matrix4x4& aRhs) {
+  bool operator != (const Matrix4x4<Type>& aRhs) const {
     return !(*this == aRhs);
   }
   
-  Matrix4x4<Type>& operator = (const Matrix4x4& aRhs) {
+  Matrix4x4<Type>& operator = (const Matrix4x4<Type>& aRhs) {
     memcpy(_elements, aRhs._elements, sizeof(_elements));
     return *this;
   }
   
   // We are row-major multipication.
-  Matrix4x4<Type> operator * (const Matrix4x4& aRhs) const {
+  Matrix4x4<Type> operator * (const Matrix4x4<Type>& aRhs) const {
     
     Matrix4x4<Type> ouput;
 //
@@ -294,7 +294,7 @@ public:
     return ouput;
   }
   
-  Matrix4x4<Type>& operator *= (const Matrix4x4& aRhs) {
+  Matrix4x4<Type>& operator *= (const Matrix4x4<Type>& aRhs) {
     *this = *this * aRhs;
     return *this;
   }

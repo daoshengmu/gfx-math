@@ -25,9 +25,9 @@ using namespace gfx_math;
 }
 
 - (void)testVectorBasic {
-  Vector3D<float> a(1, 0, 0);
+  Vector3Df a(1, 0, 0);
   
-  float res = a.DotProduct(Vector3D<float>(1, 0, 0));
+  float res = a.DotProduct(Vector3Df(1, 0, 0));
   XCTAssertEqual(res, 1.0f);
 }
 
@@ -59,7 +59,8 @@ using namespace gfx_math;
   XCTAssertEqual(interPointList.size(), 1);
   
   Vector3Df p;
-  result = RayIntersectWithTriangle(Vector3Df(0,0,-1), p0, Vector3Df(-10,-1,-5), Vector3Df(10,-1,-5), Vector3Df(5,1,-5), p);
+  result = RayIntersectWithTriangle(Vector3Df(0,0,-1), p0, Vector3Df(-10,-1,-5),
+                                    Vector3Df(10,-1,-5), Vector3Df(5,1,-5), p);
   XCTAssertTrue(result);
   XCTAssertTrue(p == Vector3Df(-2, 0, -5));
   
@@ -70,7 +71,8 @@ using namespace gfx_math;
   result = SphereIntersectWithAABBox(Vector3Df(0,0,0), 5.0f, Vector3Df(2, -2, -2), Vector3Df(6, 2, 2));
   XCTAssertTrue(result);
   
-  result = AABBoxIntersectWithAABBox(Vector3Df(0, 0, -2), Vector3Df(4, 4, 2), Vector3Df(2, -2, -2), Vector3Df(6, 2, 2));
+  result = AABBoxIntersectWithAABBox(Vector3Df(0, 0, -2), Vector3Df(4, 4, 2),
+                                     Vector3Df(2, -2, -2), Vector3Df(6, 2, 2));
   XCTAssertTrue(result);
 }
 

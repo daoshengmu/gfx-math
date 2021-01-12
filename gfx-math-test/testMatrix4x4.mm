@@ -30,30 +30,32 @@ using namespace gfx_math;
 }
 
 - (void)testBasic {
-  Matrix4x4<float> matA;
-  Matrix4x4<float> matB;
+  Matrix4x4f matA;
+  Matrix4x4f matB;
   matA.Identity();
-  XCTAssertTrue(matA == matB);
+  XCTAssertEqual(matA, matB);
   
-  Matrix4x4<float> matC = matA * matB;
-  XCTAssertTrue(matC == matA);
+  Matrix4x4f matC = matA * matB;
+  XCTAssertEqual(matC, matA);
 }
 
 - (void)testCameraMatrix {
-  Matrix4x4<float> matC;
+  Matrix4x4f matC;
   
-  matC = Matrix4x4<float>::LookAtMatrix(Vector3D<float>(0, 0.5, 0.5),
-                                        Vector3D<float>(0,0.2,-1),
-                                        Vector3D<float>(0,1,0));
+  matC = Matrix4x4f::LookAtMatrix(Vector3Df(0, 0.5, 0.5),
+                                        Vector3Df(0,0.2,-1),
+                                        Vector3Df(0,1,0));
   
-  Matrix4x4<float> matD = Matrix4x4<float>::TargetTo(Vector3D<float>(0, 0.5, 0.5),                                                                                           Vector3D<float>(0,0.2,-1),
-                                                     Vector3D<float>(0,1,0));
-  assert(matC != matD); // TODO: We haven't known how to test it.
+  Matrix4x4f matD = Matrix4x4f::TargetTo(Vector3Df(0, 0.5, 0.5),                                                                                               Vector3Df(0,0.2,-1),
+                                                     Vector3Df(0,1,0));
+  XCTAssertNotEqual(matC, matD); // TODO: We haven't known how to test it.
   
-  Matrix4x4<float> matE = Matrix4x4<float>::FPSView(Vector3D<float>(0, 0.5, 0.5), 0.1, 0.2);
+  Matrix4x4f matE = Matrix4x4f::FPSView(Vector3Df(0, 0.5, 0.5), 0.1, 0.2);
   
-  Matrix4x4<float> matF = Matrix4x4<float>::Arcball(Vector3D<float>(0, 0.5, 0.5), Quaternion<float>(1,1,0,1), Vector3D<float>(1.0, 0.5, 0.5));
-  assert(matE != matF); // TODO: We haven't known how to test it.
+  Matrix4x4f matF = Matrix4x4f::Arcball(Vector3Df(0, 0.5, 0.5),
+                                        Quaternion<float>(1,1,0,1),
+                                        Vector3Df(1.0, 0.5, 0.5));
+  XCTAssertNotEqual(matE, matF); // TODO: We haven't known how to test it.
 }
 
 - (void)testPerformanceExample {
