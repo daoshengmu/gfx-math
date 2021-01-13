@@ -41,9 +41,8 @@ using namespace gfx_math;
   bool result = RayIntersectWithPlane(ray, p0, planeNrm, planeDist, interPoint);
   XCTAssertTrue(result);
   
-  bool res = false;
-  res = PointIntersectWithPlane(interPoint, planeNrm, planeDist);
-  XCTAssertFalse(res);
+  result = PointIntersectWithPlane(interPoint, planeNrm, planeDist);
+  XCTAssertFalse(result);
   
   float dist = PointDistanceWithPlane(interPoint + Vector3Df(1, 0, 0), planeNrm, planeDist);
   XCTAssertEqual(dist, 1.0f);
