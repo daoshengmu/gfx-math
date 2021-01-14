@@ -11,6 +11,7 @@
 
 #include <cfloat>
 #include <math.h>
+#include <memory.h>
 
 #include "Quaternion.h"
 
