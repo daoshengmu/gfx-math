@@ -14,7 +14,8 @@
 using namespace gfx_math;
 
 int main(int argc, const char * argv[]) {
-  std::cout << "Start." << std::endl;
+  std::cout << "------Test Start-----" << std::endl;
+  std::cout << std::endl;
   
   Vector3D<float> a(1, 0, 0);
   
@@ -81,7 +82,8 @@ int main(int argc, const char * argv[]) {
   p = ReflectionVector(Vector3Df(0.707, 0.707, 0), Vector3Df(0, 1, 0));
   assert(p == Vector3Df(-0.707, 0.707, 0));
   
-  std::cout << "Complete." << std::endl;
+  std::cout << "------Test End-------" << std::endl;
+  std::cout << std::endl;
   
   return 0;
 }
