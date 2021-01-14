@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include <cassert>
 #include "Vector3d.h"
 #include "Matrix4x4.h"
 #include "Quaternion.h"
