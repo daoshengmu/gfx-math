@@ -189,8 +189,9 @@ public:
   }
   
   Type x, y, z, w;
-    
 };
+
+typedef Quaternion<float> Quaternionf;
 
 } // End of namespace gfx_math
 

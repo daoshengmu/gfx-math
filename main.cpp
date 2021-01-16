@@ -18,27 +18,28 @@ int main(int argc, const char * argv[]) {
   std::cout << "------Test Start-----" << std::endl;
   std::cout << std::endl;
   
-  Vector3D<float> a(1, 0, 0);
+  Vector3Df a(1, 0, 0);
   
-  float res = a.DotProduct(Vector3D<float>(1, 0, 0));
+  float res = a.DotProduct(Vector3Df(1, 0, 0));
   assert(res == 1);
   
-  Matrix4x4<float> matA;
-  Matrix4x4<float> matB;
+  Matrix4x4f matA;
+  Matrix4x4f matB;
   matA = matB;
   matA.Identity();
-  Matrix4x4<float> matC = matA * matB;
-  matC = Matrix4x4<float>::LookAtMatrix(Vector3D<float>(0, 0.5, 0.5),
-                                        Vector3D<float>(0,0.2,-1),
-                                        Vector3D<float>(0,1,0));
+  Matrix4x4f matC = matA * matB;
+  matC = Matrix4x4f::LookAtMatrix(Vector3Df(0, 0.5, 0.5),
+                                  Vector3Df(0,0.2,-1),
+                                  Vector3Df(0,1,0));
   
-  Matrix4x4<float> matD = Matrix4x4<float>::TargetTo(Vector3D<float>(0, 0.5, 0.5),                                                                                           Vector3D<float>(0,0.2,-1),
-                                                     Vector3D<float>(0,1,0));
+  Matrix4x4f matD = Matrix4x4f::TargetTo(Vector3Df(0, 0.5, 0.5), Vector3Df(0,0.2,-1),
+                                                   Vector3Df(0,1,0));
   assert(matC != matD); // TODO: We haven't known how to test it.
   
-  Matrix4x4<float> matE = Matrix4x4<float>::FPSView(Vector3D<float>(0, 0.5, 0.5), 0.1, 0.2);
+  Matrix4x4f matE = Matrix4x4f::FPSView(Vector3Df(0, 0.5, 0.5), 0.1, 0.2);
   
-  Matrix4x4<float> matF = Matrix4x4<float>::Arcball(Vector3D<float>(0, 0.5, 0.5), Quaternion<float>(1,1,0,1), Vector3D<float>(1.0, 0.5, 0.5));
+  Matrix4x4f matF = Matrix4x4f::Arcball(Vector3Df(0, 0.5, 0.5), Quaternionf(1,1,0,1),
+                                        Vector3Df(1.0, 0.5, 0.5));
   assert(matE != matF); // TODO: We haven't known how to test it.
   
   Vector3Df ray(1, 0, 0);

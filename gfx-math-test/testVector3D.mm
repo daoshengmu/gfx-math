@@ -75,7 +75,7 @@ using namespace gfx_math;
   XCTAssertTrue(result);
 }
 
-- (void)testRelection {
+- (void)testReflection {
   Vector3Df p = ReflectionVector(Vector3Df(0.707, 0.707, 0), Vector3Df(0, 1, 0));
   XCTAssertTrue(p == Vector3Df(-0.707, 0.707, 0));
 }
